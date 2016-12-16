@@ -81,6 +81,7 @@ print(linReg.coef_)
 zip(features_cols, linReg.coef_)
 print(list(zip(features_cols, linReg.coef_)))
 # In the linear formula it would be something like this
+# In the linear formula it would be something like this
 # y = 2.88 + 0.0466 * TV + 0.179 * Radio + 0.00345 * Newspaper
 # For a given amount of Radio and Newspaper ad spending,
 # a "unit" increase in TV ad spending is associated with a 0.0466 "unit" increase in Sales
