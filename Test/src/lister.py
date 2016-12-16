@@ -34,3 +34,36 @@ heapify(data)   # rearrange the list into heap order
 heappush(data, -5)  # add a new entry
 [heappop(data) for i in range(3)]  # fetch the three smallest entries
 # [-5, 0, 1]
+
+# List comprehension
+squares = [x**2 for x in range(10)]
+# When the expression is a tuple it must be parenthesized
+squares = [(x, y) for x in [1, 2, 3] for y in [3, 1, 4] if x != y]
+# Call a method on each element
+freshfruit = ['  banana', '  loganberry ', 'passion fruit  ']
+strip_freshfruit = [strpfruit.strip() for strpfruit in freshfruit]
+
+matrix = [[1, 2, 3, 4],
+          [5, 6, 7, 8],
+          [9, 10, 11, 12]]
+matrix_transpose = [[row[i] for row in matrix] for i in range(4)]
+
+# Named tuples - May be useful in some situations to access fields by names
+from collections import namedtuple
+import csv
+import sqlite3
+EmployeeRecord = namedtuple('EmployeeRecord', 'name, age, title, department, paygrade')
+for emp in map(EmployeeRecord._make, csv.reader(open("employees.csv", "rb"))):
+    print(emp.name, emp.title)
+
+conn = sqlite3.connect('/companydata')
+cursor = conn.cursor()
+cursor.execute('SELECT name, age, title, department, paygrade FROM employees')
+for emp in map(EmployeeRecord._make, cursor.fetchall()):
+    print(emp.name, emp.title)
+
+# Set - Created either with curly braces or with set()
+# Unordered with no duplicates
+basket = {'apple', 'orange', 'apple', 'pear', 'orange', 'banana'}
+print(basket)
+
