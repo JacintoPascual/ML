@@ -19,9 +19,93 @@ import numpy as np
 data = pd.read_csv("http://www-bcf.usc.edu/~gareth/ISL/Advertising.csv", index_col=0)
 
 # Display the first and last 5 rows
-print(data.head())
+print("Printing head:\n", data.head())
 # print(data.tail())
 print(data.shape)  # (200, 4)
+print("Printing sales over 20\n", data[data.Sales > 20])
+print("Printing only TV when sales over 20\n", data.loc[data.Sales > 20, 'TV'])
+# We can also "isin" with string type
+# movies[movies.genre.isin(['Crime', 'Drama', 'Action'])].head(10)
+# various methods are available to iterate through a DataFrame
+for index, row in data.iterrows():
+    print(index, data.TV, data.Radio)
+# From another example
+# only include numeric columns in the DataFrame
+# drinks.select_dtypes(include=[np.number]).dtypes
+# drinks.describe(include='all')
+# pass a list of data types to only describe certain types
+# drinks.describe(include=['object', 'float64'])
+# you can interact with any DataFrame using its index and columns
+# drinks.describe().loc['25%', 'beer_servings']
+# 'index' is an alias for axis 0 and 'columns' is an alias for axis 1
+# drinks.mean(axis='index')
+# drinks.mean(axis='columns').head()
+# many pandas string methods support regular expressions (regex)
+# orders.choice_description.str.replace('[\[\]]', '').head()
+#
+# calculate the mean beer servings just for countries in Africa
+# drinks[drinks.continent=='Africa'].beer_servings.mean()
+# calculate the mean beer servings for each continent
+# drinks.groupby('continent').beer_servings.mean()
+# other aggregation functions (such as 'max') can also be used with groupby
+# drinks.groupby('continent').beer_servings.max()
+# multiple aggregation functions can be applied simultaneously
+# drinks.groupby('continent').beer_servings.agg(['count', 'mean', 'min', 'max'])
+# display percentages instead of raw counts
+# movies.genre.value_counts(normalize=True)
+# count the number of missing values in each Series
+# movies.isnull().sum()
+# use the 'isnull' Series method to filter the DataFrame rows
+# movies[movies.genre.isnull()].head()
+# if 'any' values are missing in a row, then drop that row
+# ufo.dropna(how='any').shape
+# if 'all' values are missing in a row, then drop that row (none are dropped in this case)
+# ufo.dropna(how='all').shape
+# if 'any' values are missing in a row (considering only 'City' and 'Shape Reported'), then drop that row
+# ufo.dropna(subset=['City', 'Shape Reported'], how='any').shape
+# explicitly include missing values
+# ufo['Shape Reported'].value_counts(dropna=False).head()
+# fill in missing values with a specified value
+# ufo['Shape Reported'].fillna(value='VARIOUS', inplace=True)
+# create a small DataFrame from a dictionary
+# df = pd.DataFrame({'ID':[100, 101, 102, 103], 'quality':['good', 'very good', 'good', 'excellent']})
+#
+# create a DataFrame of passenger IDs and testing set predictions
+# ensure that PassengerID is the first column by setting it as the index
+# write the DataFrame to a CSV file that can be submitted to Kaggle
+# pd.DataFrame({'PassengerId': test.PassengerId, 'Survived': new_pred_class}).set_index('PassengerId').to_csv('sub.csv')
+# save a DataFrame to disk ("pickle it")
+# train.to_pickle('train.pkl')
+# read a pickled object from disk ("unpickle it")
+# pd.read_pickle('train.pkl').head()
+#
+# sample 75% of the DataFrame's rows without replacement
+# train = ufo.sample(frac=0.75, random_state=99)
+# store the remaining 25% of the rows in another DataFrame
+# test = ufo.loc[~ufo.index.isin(train.index), :]
+#
+# use the 'drop_first' parameter (new in pandas 0.18) to drop the first dummy variable for each feature
+# pd.get_dummies(train, columns=['Sex', 'Embarked'], drop_first=True).head()
+#
+# read a dataset of movie reviewers into a DataFrame
+user_cols = ['user_id', 'age', 'gender', 'occupation', 'zip_code']
+users = pd.read_table('http://bit.ly/movieusers', sep='|', header=None, names=user_cols, index_col='user_id')
+# detect duplicate zip codes: True if an item is identical to a previous item
+users.zip_code.duplicated().tail()
+# count the duplicate items (True becomes 1, False becomes 0)
+users.zip_code.duplicated().sum()
+# detect duplicate DataFrame rows: True if an entire row is identical to a previous row
+users.duplicated().tail()
+# examine the duplicate rows (ignoring the first occurrence)
+users.loc[users.duplicated(keep='first'), :]
+# drop the duplicate rows (inplace=False by default)
+users.drop_duplicates(keep='first').shape
+# only consider a subset of columns when identifying duplicates
+users.duplicated(subset=['age', 'zip_code']).sum()
+#
+# view the option descriptions (including the default and current values)
+pd.describe_option()
+
 
 
 # The data is the advertising dollars spent on a single ads for different media in a single market
