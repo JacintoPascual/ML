@@ -6,7 +6,7 @@
 # two byte unsigned binary numbers (typecode "H") rather than the usual 16 bytes
 from array import array
 a = array('H', [4000, 10, 700, 22222])
-sum(a) # 26932
+sum(a)  # 26932
 a[1:3]
 
 # The collections module provides a deque() object that is like a list with faster
