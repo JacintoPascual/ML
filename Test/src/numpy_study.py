@@ -3,76 +3,68 @@ import time
 from timeit import Timer
 # arange([start,] stop[, step,], dtype=None)
 # arange returns evenly spaced values within a given interval.
-# a = np.arange(1, 10)
-print(a)
+a = np.arange(1, 10)
+print("Print numpy arange", a)
 # compare to range:
 x = range(1, 10)
-print(x)    # x is an iterator
-print(list(x))
+print("Print Python range", x)    # x is an iterator
+print("Print list based on range", list(x))
 # some more arange examples:
-# x = np.arange(10.4)
-print(x)
-# x = np.arange(0.5, 10.4, 0.8)
-print(x)
-# x = np.arange(0.5, 10.4, 0.8, int)
-print(x)
+x = np.arange(10.4)
+print("Print float numpy arange up to 10.4", x)
+x = np.arange(0.5, 10.4, 0.8)
+print("Print a stepped numpy arange", x)
+x = np.arange(0.5, 10.4, 0.8, int)
+print("Print int numpy arange", x)
 
 # linspace(start, stop, num=50, endpoint=True, retstep=False)
 # linspace returns an ndarray, consisting of 'num' equally spaced samples in the closed interval [start, stop]
 # or the half-open interval [start, stop).
 # 50 values between 1 and 10:
-#print(np.linspace(1, 10))
+print("Print linspace stop 10 (50)", np.linspace(1, 10))
 # 7 values between 1 and 10:
-#print(np.linspace(1, 10, 7))
+print("Print linspace stop 10 (7) w/ endpoint", np.linspace(1, 10, 7))
 # excluding the endpoint:
-#print(np.linspace(1, 10, 7, endpoint=False))
+print("Print linspace stop 10 (7) no endpoint", np.linspace(1, 10, 7, endpoint=False))
 
 #  If the optional parameter 'retstep' is set, the function will also return the value of the spacing
 #  between adjacent values. So, the function will return a tuple ('samples', 'step'):
-#samples, spacing = np.linspace(1, 10, retstep=True)
-#print(spacing)
+samples, spacing = np.linspace(1, 10, retstep=True)
+print("Print linspace spacing", spacing)
 #samples, spacing = np.linspace(1, 10, 20, endpoint=True, retstep=True)
 #print(spacing)
 #samples, spacing = np.linspace(1, 10, 20, endpoint=False, retstep=True)
 #print(spacing)
 
 
-# One of the main advantages of NumPy is its advantage in time compared to standard Python.
+# One of the main advantages of numPy is its advantage in time compared to standard Python.
 # Let's look at the following functions:
 size_of_vec = 1000
+
+
 def pure_python_version():
     t1 = time.time()
-    X = range(size_of_vec)
-    Y = range(size_of_vec)
-    Z = []
-    for i in range(len(X)):
-        Z.append(X[i] + Y[i])
-    return time.time() - t1
-def numpy_version():
-    t1 = time.time()
-    X = np.arange(size_of_vec)
-    Y = np.arange(size_of_vec)
-    Z = X + Y
+    x1 = range(size_of_vec)
+    y1 = range(size_of_vec)
+    z1 = []
+    for i in range(len(x1)):
+        z1.append(x1[i] + y1[i])
     return time.time() - t1
 
-t1 = pure_python_version()
-t2 = numpy_version()
-print(t1, t2)
-print("Numpy is in this example " + str(t1/t2) + " faster!")
 
-
-size_of_vec = 1000
-def pure_python_version():
-    X = range(size_of_vec)
-    Y = range(size_of_vec)
-    Z = []
-    for i in range(len(X)):
-        Z.append(X[i] + Y[i])
 def numpy_version():
-    X = np.arange(size_of_vec)
-    Y = np.arange(size_of_vec)
-    Z = X + Y
-#timer_obj = Timer("x = x + 1", "x = 0")
+    t2 = time.time()
+    x2 = np.arange(size_of_vec)
+    y2 = np.arange(size_of_vec)
+    z2 = x2 + y2
+    return time.time() - t2
+
+t3 = pure_python_version()
+t4 = numpy_version()
+print("Printing times: ", t3, t4)
+# print("numpy is in this example " + str(t3/t4) + " faster!")
+
+# timer_obj = Timer("x = x + 1", "x = 0")
 timer_obj1 = Timer("pure_python_version()", "from __main__ import pure_python_version")
 timer_obj2 = Timer("numpy_version()", "from __main__ import numpy_version")
 print(timer_obj1.timeit(10))
@@ -88,34 +80,21 @@ print("The type of x: ", type(x))
 print("The dimension of x:", np.ndim(x))
 
 # We create array them by passing nested lists (or tuples) to the array method of numpy.
-A = np.array([ [3.4, 8.7, 9.9],
-               [1.1, -7.8, -0.7],
-               [4.1, 12.3, 4.8]])
-print(A)
-print(A.ndim)
-B = np.array([ [[111, 112], [121, 122]],
-               [[211, 212], [221, 222]],
-               [[311, 312], [321, 322]] ])
-print(B)
-print(B.ndim)
-print(B.shape)
+A = np.array([[3.4, 8.7, 9.9],
+              [1.1, -7.8, -0.7],
+              [4.1, 12.3, 4.8]])
+print("Print ndim numpy array ",  A)
+print("The dimension of the array: ", A.ndim)
+print("The shape of the array: ", A.shape)
 
-
-F = np.array([1, 1, 2, 3, 5, 8, 13, 21])
-# print the first element of F, i.e. the element with the index 0
-print(F[0])
-# print the last element of F
-print(F[-1])
-B = np.array([ [[111, 112], [121, 122]],
-               [[211, 212], [221, 222]],
-               [[311, 312], [321, 322]] ])
-print(B[0][1][0])
-
-A = np.array([ [3.4, 8.7, 9.9],
-               [1.1, -7.8, -0.7],
-               [4.1, 12.3, 4.8]])
-print(A[1][0])
-print(A[1, 0])  # This is more efficient
+B = np.array([[[111, 112], [121, 122]],
+              [[211, 212], [221, 222]],
+              [[311, 312], [321, 322]]])
+print("Print ndim numpy array ",  B)
+print("The dimension of the array: ", B.ndim)
+print("The shape of the array: ", B.shape)
+print("Print an element of the array: ", B[0][1][0])
+print("This is more efficient: ", B[0, 1, 0])
 
 S = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
 print(S[2:5])
@@ -124,29 +103,31 @@ print(S[6:])
 print(S[:])
 
 A = np.array([
-[11, 12, 13, 14, 15],
-[21, 22, 23, 24, 25],
-[31, 32, 33, 34, 35],
-[41, 42, 43, 44, 45],
-[51, 52, 53, 54, 55]])
-print(A[:3, 2:])
+    [11, 12, 13, 14, 15],
+    [21, 22, 23, 24, 25],
+    [31, 32, 33, 34, 35],
+    [41, 42, 43, 44, 45],
+    [51, 52, 53, 54, 55]])
+print("The dimension is: ", A.ndim)
+print("Printing part of the array:\n", A[:3, 2:])
 
 # The following two examples use the third parameter "step".
 # The reshape function is used to construct the two-dimensional array.
-X = np.arange(28).reshape(4,7)
+X = np.arange(28).reshape(4, 7)
 print(X)
-print(X[::2, ::3])
+print("Printing part of the numpy array:\n", X[::2, ::3])
 print(X[::, ::3])
 
-# Attention: Whereas slicings on lists and tuples create new objects, a slicing operation on an array
+# Attention: Whereas slicing on lists and tuples create new objects, a slicing operation on an array
 # creates a view on the original array. So we get an another possibility to access the array,
 # or better a part of the array. From this follows that if we modify a view,
 # the original array will be modified as well.
 A = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+print("Printing a numpy array:\n", A)
 S = A[2:6]
 S[0] = 22
 S[1] = 23
-print(A)
+print("Array modified through view:\n", A)
 
 # With list we get a copy
 lst = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -157,12 +138,13 @@ print(lst)
 
 # If you want to check, if two array names share the same memory block, you can use the function np.may_share_memory.
 np.may_share_memory(A, S)
-
 # The following code shows a case, in which the use of may_share_memory is quite useful:
 A = np.arange(12)
+print("Printing original A: ", A)
 B = A.reshape(3, 4)
+print("Printing B reshaped from A numpy array:\n", B)
 A[0] = 42
-print(B)
+print("Printing B modified numpy array:\n", B)
 
 # We can see that A and B share the memory in some way. The array attribute "data" is an object pointer
 # to the start of an array's data. Looking at the data attribute returns something surprising:
@@ -172,7 +154,6 @@ print(A.data == B.data)
 
 # Let's check now on equality of the arrays:
 print(A == B)
-
 # Which makes sense, because they are different arrays concerning their structure:
 print(A)
 print(B)
@@ -183,9 +164,9 @@ np.may_share_memory(A, B)
 
 
 E = np.ones((2, 3))
-print(E)
+print("Printing E:\n", E)
 F = np.ones((3, 4), dtype=int)
-print(F)
+print("Printing F:\n", F)
 # What we have said about the method ones() is valid for the method zeros() analogously,
 # as we can see in the following example:
 
@@ -241,22 +222,22 @@ np.eye(5, 8, k=1, dtype=int)
 #  Solutions
 #  1)
 #  import numpy as np
-a = np.array([3, 8, 12, 18, 7, 11, 30])
+v = np.array([3, 8, 12, 18, 7, 11, 30])
 #  2)
-odd_elements = a[1::2]
+odd_elements = v[1::2]
 #  3)
-reverse_order = a[::-1]
+reverse_order = v[::-1]
 #  4) The output will be 200, because slices are views in numpy and not copies.
 #  5)
 m = np.array([[11, 12, 13, 14], [21, 22, 23, 24], [31, 32, 33, 34]])
 #  6)
-m[::, ::-1]
+reversed_row_elements = m[::, ::-1]
 #  7)
-m[::-1]
+reversed_rows = m[::-1]
 #  8)
-m[::-1, ::-1]
+reversed_row_and_columns = m[::-1, ::-1]
 #  9)
-m[1:-1, 1:-1]
+cut_first_last_row_and_column = m[1:-1, 1:-1]
 
 
 
