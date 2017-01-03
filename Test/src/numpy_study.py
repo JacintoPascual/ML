@@ -8,7 +8,7 @@ print("Print numpy arange", a)
 # compare to range:
 x = range(1, 10)
 print("Print Python range", x)    # x is an iterator
-print("Print list based on range", list(x))
+print("Print list based on Python range", list(x))
 # some more arange examples:
 x = np.arange(10.4)
 print("Print float numpy arange up to 10.4", x)
@@ -21,7 +21,7 @@ print("Print int numpy arange", x)
 # linspace returns an ndarray, consisting of 'num' equally spaced samples in the closed interval [start, stop]
 # or the half-open interval [start, stop).
 # 50 values between 1 and 10:
-print("Print linspace stop 10 (50)", np.linspace(1, 10))
+print("Print linspace stop 10 (50)\n", np.linspace(1, 10))
 # 7 values between 1 and 10:
 print("Print linspace stop 10 (7) w/ endpoint", np.linspace(1, 10, 7))
 # excluding the endpoint:
@@ -67,8 +67,8 @@ print("Printing times: ", t3, t4)
 # timer_obj = Timer("x = x + 1", "x = 0")
 timer_obj1 = Timer("pure_python_version()", "from __main__ import pure_python_version")
 timer_obj2 = Timer("numpy_version()", "from __main__ import numpy_version")
-print(timer_obj1.timeit(10))
-print(timer_obj2.timeit(10))
+print("Print Timer obj 1: ", timer_obj1.timeit(10))
+print("Print Timer obj 2: ", timer_obj2.timeit(10))
 
 
 # It's possible to create multidimensional arrays in numpy. Scalars are zero dimensional.
@@ -83,14 +83,14 @@ print("The dimension of x:", np.ndim(x))
 A = np.array([[3.4, 8.7, 9.9],
               [1.1, -7.8, -0.7],
               [4.1, 12.3, 4.8]])
-print("Print ndim numpy array ",  A)
+print("Print ndim numpy array\n",  A)
 print("The dimension of the array: ", A.ndim)
 print("The shape of the array: ", A.shape)
 
 B = np.array([[[111, 112], [121, 122]],
               [[211, 212], [221, 222]],
               [[311, 312], [321, 322]]])
-print("Print ndim numpy array ",  B)
+print("Print ndim numpy array\n",  B)
 print("The dimension of the array: ", B.ndim)
 print("The shape of the array: ", B.shape)
 print("Print an element of the array: ", B[0][1][0])
@@ -109,14 +109,14 @@ A = np.array([
     [41, 42, 43, 44, 45],
     [51, 52, 53, 54, 55]])
 print("The dimension is: ", A.ndim)
-print("Printing part of the array:\n", A[:3, 2:])
+print("Printing part of the numpy array:\n", A[:3, 2:])
 
 # The following two examples use the third parameter "step".
 # The reshape function is used to construct the two-dimensional array.
 X = np.arange(28).reshape(4, 7)
 print(X)
 print("Printing part of the numpy array:\n", X[::2, ::3])
-print(X[::, ::3])
+print("Printing part of the numpy array:\n", X[::, ::3])
 
 # Attention: Whereas slicing on lists and tuples create new objects, a slicing operation on an array
 # creates a view on the original array. So we get an another possibility to access the array,
