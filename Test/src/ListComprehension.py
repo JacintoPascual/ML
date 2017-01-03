@@ -8,7 +8,6 @@ Created on Sep 27, 2016
 # See > https://docs.python.org/3.5/tutorial/stdlib2.html
 from src.apihelper import *
 import string
-import pandas as pd
 import math as m
 from collections import deque
 import os as opSys
@@ -45,7 +44,7 @@ re.findall(r'\bf[a-z]*', 'which foot or hand fell fastest')
 re.sub(r'(\b[a-z]+) \1', r'\1', 'cat in the the hat')
 'cat in the hat'
 
-vec = [[1,2,3], [4,5,6], [7,8,9]]
+vec = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 [num for elem in vec for num in elem]
 # [1, 2, 3, 4, 5, 6, 7, 8, 9]
 

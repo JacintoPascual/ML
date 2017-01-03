@@ -1,6 +1,5 @@
 
 # sentdex youtube video
-import pandas as pd
 import quandl
 import math
 import numpy as np

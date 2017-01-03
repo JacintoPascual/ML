@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import operator
 
+
 answer = lambda x: x*7
 print(answer(5))
 
@@ -12,6 +13,7 @@ stocks = {
     'AAPL': 99.76
 }
 
+min
 print(min((zip(stocks.keys(), stocks.values()))))
 print(max((zip(stocks.keys(), stocks.values()))))
 print(sorted(zip(stocks.keys(), stocks.values())))

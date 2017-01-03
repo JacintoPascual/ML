@@ -1,4 +1,4 @@
-# Features are always numbers. In case of text they mus be  "converted" to numbers
+# Features are always numbers. In case of text they must be  "converted" to numbers
 from sklearn.feature_extraction.text import CountVectorizer
 
 # Example text for model training (SMS messages)

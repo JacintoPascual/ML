@@ -6,8 +6,9 @@
 # two byte unsigned binary numbers (typecode "H") rather than the usual 16 bytes
 from array import array
 a = array('H', [4000, 10, 700, 22222])
-sum(a) # 26932
-a[1:3]
+print(a)
+sum(a)  # 26932
+print(a[1:3])
 
 # The collections module provides a deque() object that is like a list with faster
 # appends and pops from the left side but slower lookups in the middle.
@@ -15,7 +16,7 @@ a[1:3]
 from collections import deque
 d = deque(["task1", "task2", "task3"])
 d.append("task4")
-print("Handling", d.popleft()) # Handling task1
+print("Handling", d.popleft())  # Handling task1
 
 # In addition to alternative list implementations, the library also offers other tools
 #  such as the bisect module with functions for manipulating sorted lists:
@@ -53,8 +54,8 @@ from collections import namedtuple
 import csv
 import sqlite3
 EmployeeRecord = namedtuple('EmployeeRecord', 'name, age, title, department, paygrade')
-for emp in map(EmployeeRecord._make, csv.reader(open("employees.csv", "rb"))):
-    print(emp.name, emp.title)
+#  for emp in map(EmployeeRecord._make, csv.reader(open("employees.csv", "rb"))):
+#    print(emp.name, emp.title)
 
 conn = sqlite3.connect('/companydata')
 cursor = conn.cursor()
